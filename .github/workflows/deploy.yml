@@ -35,9 +35,10 @@ jobs:
       - name: Build and push Docker image
         run: |
           IMAGE_TAG=$(date +%s)
-          docker build -t ${{ secrets.AWS_ECR_URL }}/webapp:$IMAGE_TAG ./app
-          docker push ${{ secrets.AWS_ECR_URL }}/webapp:$IMAGE_TAG
+          docker build -t ${{ secrets.AWS_ECR_URL }}:$IMAGE_TAG ./app
+          docker push ${{ secrets.AWS_ECR_URL }}:$IMAGE_TAG
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+
 
       # ✅ 6. AWS ECS のタスク定義を更新してデプロイ
       - name: Deploy to Amazon ECS
